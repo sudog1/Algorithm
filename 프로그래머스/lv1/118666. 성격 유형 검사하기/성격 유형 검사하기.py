@@ -18,4 +18,5 @@ def solution(survey, choices):
             result.append(pers_type[i])
         else:
             result.append(pers_type[i+1])
+            
     return ''.join(result)
