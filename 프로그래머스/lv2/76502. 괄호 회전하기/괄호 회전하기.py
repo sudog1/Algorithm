@@ -1,43 +1,49 @@
 from collections import deque
 
-def inspect(s, n):
-    stack = []
-    for i in s:
-        if stack:
-            if n[stack[-1]] < 5:
-                if n[i] < 5:
-                    stack.append(i)
-                else :
-                    stack.pop()
-            else:
-                return 0
-        else:
-            stack.append(i)
-    return 1
 def solution(s):
-    answer = 0
     s = deque(s)
-    stack = []
-    n = {'[':1, '{':2, '(':3, ')':7, '}':8, ']':9}
-    for i in s:
-        if stack:
-            if n[stack[-1]] < 5:
-                if n[i] < 5:
-                    stack.append(i)
-                elif n[stack[-1]] + n[i] == 10:
-                    stack.pop()
+    temp = deque()
+    deq = deque()
+    bk = {'[':1, '{':2, '(':3, ')':5, '}':6, ']':7}
+    while s:
+        if not deq:
+            temp.append(s[0])
+            deq.append(s[0])
+            s.popleft()
+        else:
+            if bk[deq[-1]] < 4:
+                if bk[s[0]] < 4:
+                    deq.append(s[0])
+                    temp.append(s[0])
+                    s.popleft()
+                elif bk[deq[-1]] + bk[s[0]] == 8:
+                    temp.append(s[0])
+                    deq.pop()
+                    s.popleft()
                 else:
                     return 0
             else:
-                if n[stack[-1]] + n[i] == 10:
-                    stack.pop()
+                if bk[s[-1]] > 4:
+                    deq.appendleft(s[-1])
+                    temp.appendleft(s[-1])
+                    s.pop()
+                elif bk[deq[0]] + bk[s[-1]] == 8:
+                    temp.appendleft(s[-1])
+                    deq.popleft()
+                    s.pop()
                 else:
-                    stack.append(i)
-        else:
-            stack.append(i)                             
-    if stack:
+                    return 0
+    if deq:
         return 0
-    for _ in range(len(s)):
-        answer += inspect(s, n)
-        s.append(s.popleft())
-    return answer
+    
+    count = 0
+    stack = []
+    for c in temp:
+        if bk[c] < 4:
+            stack.append(c)
+        else:
+            stack.pop()
+        if not stack:
+            count += 1
+    
+    return count
