@@ -7,8 +7,8 @@ def dijkstra(N, graph, cost, K):
     heap = [[dist[1], 1]]
     while heap:
         d, node = heapq.heappop(heap)
-        if dist[node] < d:
-            continue
+        # if dist[node] < d:
+        #     continue
         for adj in graph[node]:
             if dist[adj] > d+cost[node][adj]:
                 dist[adj] = d+cost[node][adj]
