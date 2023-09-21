@@ -4,6 +4,7 @@ def time_to_min(time):
     e_h, e_m = map(int, end.split(':'))
     return [s_h*60+s_m, e_h*60+e_m]
 
+
 def solution(book_time):
     acc_client = [0]*(24*60+10)
     book_min = list(map(time_to_min, book_time))
