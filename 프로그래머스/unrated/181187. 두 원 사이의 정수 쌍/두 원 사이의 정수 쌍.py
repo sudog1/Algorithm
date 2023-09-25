@@ -1,6 +1,3 @@
-# from math import floor, sqrt
-
-
 def solution(r1, r2):
     answer = 0
     for x in range(1, r2+1):
