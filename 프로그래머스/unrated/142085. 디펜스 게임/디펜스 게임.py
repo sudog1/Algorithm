@@ -1,6 +1,5 @@
 import heapq
 
-
 def solution(n, k, enemy):
     answer = 0
     invinc = enemy[:k]
