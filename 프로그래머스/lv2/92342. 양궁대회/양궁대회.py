@@ -1,5 +1,3 @@
-
-
 def shoot(n, info, target, state, score):
     global max_score, final_state, is_win
     if target == len(info):
@@ -22,6 +20,7 @@ def shoot(n, info, target, state, score):
                     final_state[i] = state[i]
             state[-1] = 0
         return
+        
     shoot(n, info, target+1, state, score)
     if info[target]+1 <= n:
         n -= info[target]+1
@@ -29,6 +28,7 @@ def shoot(n, info, target, state, score):
         score += (10-target) * (2 if info[target] else 1)
         shoot(n, info, target+1, state, score)
         state[target] = 0
+
 
 def solution(n, info):
     global max_score, final_state
